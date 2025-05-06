@@ -1,5 +1,6 @@
 <div class="search-field-container">
-	<input type="text" class="search-field" placeholder="Search for an entry by name" />
+	<input type="text" class="search-field" placeholder="Search for an entry by name" [ngModel]="searchTerm"
+		(input)="onSearch($event)" />
 </div>
 <div class="entries-table-header-container">
 	<div class="entries-table-header">ID</div>
