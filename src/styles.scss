@@ -53,18 +53,33 @@ a {
 }
 
 .primary-btn {
-  border: 1px solid rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--active-font-color);
   background: none;
-  height: 48px;
+  height: 24px;
+  width: 50%;
   padding: 0 24px 0 24px;
-  color: var(--primary-font-color);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--active-font-color);
   border-radius: 100px;
   gap: 10px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+
+  > span {
+    transition: transform 0.8s ease-in-out;
+  }
 
   &:hover {
-    border-color: var(--active-font-color);
-    color: var(--active-font-color);
+    border-color: var(--primary-font-color);
+
+    > span {
+      transform: translateX(-200%);
+      color: var(--primary-font-color);
+    }
   }
 }
