@@ -16,8 +16,7 @@ body {
   font-family: "Poppins", sans-serif;
   color: var(--primary-font-color);
   background-color: var(--phonebook-bg);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 
   cursor: default;
   scroll-behavior: smooth;
@@ -84,23 +83,23 @@ a {
   }
 }
 
-::-webkit-scrollbar {
-  width: 2px;
-  background: transparent;
-  padding-left: 2px;
-}
-::-webkit-scrollbar-thumb {
-  background: transparent;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-::-webkit-scrollbar-button {
-  background: transparent;
-}
-::-webkit-scrollbar-track-piece {
-  background: transparent;
-}
+// ::-webkit-scrollbar {
+//   width: 2px;
+//   background: transparent;
+//   padding-left: 2px;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background: transparent;
+// }
+// ::-webkit-scrollbar-track {
+//   background: transparent;
+// }
+// ::-webkit-scrollbar-corner {
+//   background: transparent;
+// }
+// ::-webkit-scrollbar-button {
+//   background: transparent;
+// }
+// ::-webkit-scrollbar-track-piece {
+//   background: transparent;
+// }
