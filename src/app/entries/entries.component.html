@@ -12,7 +12,7 @@
 	<div class="entries-table-header">Delete Entry</div>
 </div>
 <div class="entries-table-container">
-	<app-entry *ngFor="let entry of entries" [entry]="entry" />
+	<app-entry *ngFor="let entry of entries" [entry]="entry" (deleteEntry)="handleDelete($event)" />
 </div>
 <div class="add-btn-container">
 	<button class="primary-btn"><span>Add Entry</span></button>
