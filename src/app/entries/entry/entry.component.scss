@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.single-entry-value-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-font-color);
+  width: 14.28%;
+  height: 48px;
+  border-bottom: 1px solid var(--active-font-color);
+}
