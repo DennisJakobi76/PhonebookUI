@@ -13,12 +13,13 @@ import { ApiService } from '../api.service';
 })
 export class PortSwitchComponent {
   selectedApi: string = '';
-  apiStatus: 'ok' | 'error' | null = null;
+  apiStatus: 'ok' | 'error' | 'checking' | null = null;
 
   constructor(private apiService: ApiService) {}
 
   checkApiStatus() {
     if (this.selectedApi) {
+      this.apiStatus = 'checking';
       this.apiService.checkApi(this.selectedApi).subscribe(
         () => (this.apiStatus = 'ok'),
         () => (this.apiStatus = 'error')

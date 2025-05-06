@@ -7,21 +7,24 @@
 			<label for="java">Java Phonebook API</label>
 			<div class="custom-radio-container">
 				<input class="custom-radio" type="radio" name="fav-api" id="java" [value]="'http://localhost:8080'"
-					[(ngModel)]="selectedApi" (ngModelChange)="checkApiStatus()" />
+					[(ngModel)]="selectedApi" (ngModelChange)="checkApiStatus()"
+					[disabled]="apiStatus === 'checking'" />
 			</div>
 		</div>
 		<div class="api-name-container">
 			<label for="dotnet">.Net Phonebook API</label>
 			<div class="custom-radio-container">
 				<input class="custom-radio" type="radio" name="fav-api" id="dotnet" [value]="'http://localhost:5000'"
-					[(ngModel)]="selectedApi" (ngModelChange)="checkApiStatus()" />
+					[(ngModel)]="selectedApi" (ngModelChange)="checkApiStatus()"
+					[disabled]="apiStatus === 'checking'" />
 			</div>
 		</div>
 	</div>
 
 	<div class="api-status-message-container">
+		<div *ngIf="apiStatus === 'checking'" id="api-status-checking" class="api-status-checking">Checking API
+			status...</div>
 		<div *ngIf="apiStatus === 'ok'" id="api-status-ok" class="api-status-ok">API is running</div>
 		<div *ngIf="apiStatus === 'error'" id="api-status-error" class="api-status-error">API is not running</div>
 	</div>
-
 </div>
