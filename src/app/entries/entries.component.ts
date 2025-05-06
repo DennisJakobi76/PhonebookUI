@@ -59,4 +59,8 @@ export class EntriesComponent implements OnInit, OnDestroy {
       error: () => (this.entries = []),
     });
   }
+
+  handleDelete(id: number) {
+    this.entries = this.entries.filter((entry) => entry.id !== id);
+  }
 }
