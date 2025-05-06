@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --phonebook-bg: rgba(28, 28, 28, 1);
+  --active-font-color: rgba(61, 207, 182, 1);
+  --primary-font-color: rgba(217, 217, 2127, 1);
+  --white-text: rgba(255, 255, 255, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  color: var(--primary-font-color);
+  background-color: var(--phonebook-bg);
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  cursor: default;
+  scroll-behavior: smooth;
+}
+
+html {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  width: 1440px;
+  height: 100vh;
+  padding: 0 80px;
+}
+
+.display-none {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-font-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: var(--active-font-color);
+  }
+}
+
+.primary-btn {
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: none;
+  height: 48px;
+  padding: 0 24px 0 24px;
+  color: var(--primary-font-color);
+  border-radius: 100px;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border-color: var(--active-font-color);
+    color: var(--active-font-color);
+  }
+}
