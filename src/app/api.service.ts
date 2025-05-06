@@ -45,7 +45,7 @@ export class ApiService {
     searchTerm: string = ''
   ): Observable<PhonebookEntry[]> {
     const url = searchTerm
-      ? `${apiUrl}/api/phonebook/search?term=${searchTerm}`
+      ? `${apiUrl}/api/phonebook?name=${searchTerm}`
       : `${apiUrl}/api/phonebook`;
     return this.http.get<PhonebookEntry[]>(url);
   }
