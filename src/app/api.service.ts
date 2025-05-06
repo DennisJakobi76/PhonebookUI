@@ -26,7 +26,13 @@ export class ApiService {
     return this.http.get(`${apiUrl}/api/phonebook`);
   }
 
-  getEntries(apiUrl: string): Observable<PhonebookEntry[]> {
-    return this.http.get<PhonebookEntry[]>(`${apiUrl}/api/phonebook`);
+  getEntries(
+    apiUrl: string,
+    searchTerm?: string
+  ): Observable<PhonebookEntry[]> {
+    const url = searchTerm
+      ? `${apiUrl}/api/phonebook?name=${searchTerm}`
+      : `${apiUrl}/api/phonebook`;
+    return this.http.get<PhonebookEntry[]>(url);
   }
 }
