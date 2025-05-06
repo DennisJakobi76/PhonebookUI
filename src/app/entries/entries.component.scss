@@ -51,6 +51,12 @@
   }
 }
 
+.entries-table-container {
+  height: 200px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
 .add-btn-container {
   display: flex;
   justify-content: flex-end;
