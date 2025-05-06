@@ -5,6 +5,7 @@ import { PortSwitchComponent } from './port-switch/port-switch.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, HeaderComponent, PortSwitchComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
