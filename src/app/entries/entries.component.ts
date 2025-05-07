@@ -5,11 +5,12 @@ import { Subscription } from 'rxjs';
 import { EntryComponent } from './entry/entry.component';
 import { ApiService } from '../api.service';
 import { PhonebookEntry } from '../models/phonebook-entry';
+import { EntryDetailComponent } from './entry-detail/entry-detail.component';
 
 @Component({
   selector: 'app-entries',
   standalone: true,
-  imports: [EntryComponent, CommonModule, FormsModule],
+  imports: [EntryComponent, CommonModule, FormsModule, EntryDetailComponent],
   templateUrl: './entries.component.html',
   styleUrl: './entries.component.scss',
 })
