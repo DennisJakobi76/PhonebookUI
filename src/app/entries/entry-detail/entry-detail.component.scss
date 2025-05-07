@@ -14,6 +14,13 @@
   border: 1px solid var(--active-font-color);
   border-radius: 30px;
   z-index: 1;
+
+  transition: all 0.5s ease-in-out;
+  scale: 0;
+
+  &.visible {
+    scale: 1;
+  }
 }
 
 .input-container {

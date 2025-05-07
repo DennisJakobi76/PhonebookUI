@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,8 @@ export class EntriesComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
   private currentApiUrl: string = '';
   private subscriptions: Subscription[] = [];
+
+  @ViewChild(EntryDetailComponent) entryDetail!: EntryDetailComponent;
 
   constructor(private apiService: ApiService) {}
 
@@ -63,5 +65,9 @@ export class EntriesComponent implements OnInit, OnDestroy {
 
   handleDelete(id: number) {
     this.entries = this.entries.filter((entry) => entry.id !== id);
+  }
+
+  showEntryDetail() {
+    this.entryDetail.show();
   }
 }
