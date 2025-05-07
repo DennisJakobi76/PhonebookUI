@@ -78,16 +78,26 @@ export class EntriesComponent implements OnInit, OnDestroy {
         this.allEntries = entries;
         this.filterEntries();
       },
-      error: () => {
+      error: (error) => {
+        console.error('Error loading entries:', error);
         this.entries = [];
         this.allEntries = [];
+        // Hier könnte eine Fehlermeldung für den Benutzer angezeigt werden
       },
     });
   }
 
   handleDelete(id: number) {
-    this.allEntries = this.allEntries.filter((entry) => entry.id !== id);
-    this.filterEntries();
+    this.apiService.deleteEntry(this.currentApiUrl, id).subscribe({
+      next: () => {
+        this.allEntries = this.allEntries.filter((entry) => entry.id !== id);
+        this.filterEntries();
+      },
+      error: (error) => {
+        console.error('Error deleting entry:', error);
+        // Hier könnte eine Fehlermeldung für den Benutzer angezeigt werden
+      },
+    });
   }
 
   showEntryDetail() {
@@ -95,29 +105,16 @@ export class EntriesComponent implements OnInit, OnDestroy {
   }
 
   addNewEntry(entryData: Omit<PhonebookEntry, 'id'>) {
-    const newId = this.getNextAvailableId();
-    const newEntry: PhonebookEntry = {
-      id: newId,
-      ...entryData,
-    };
-
-    this.allEntries = [...this.allEntries, newEntry];
-    this.filterEntries();
-  }
-
-  private getNextAvailableId(): number {
-    if (this.allEntries.length === 0) {
-      return 1;
-    }
-
-    const usedIds = new Set(this.allEntries.map((entry) => entry.id));
-    let nextId = 1;
-
-    while (usedIds.has(nextId)) {
-      nextId++;
-    }
-
-    return nextId;
+    this.apiService.createEntry(this.currentApiUrl, entryData).subscribe({
+      next: (newEntry) => {
+        this.allEntries = [...this.allEntries, newEntry];
+        this.filterEntries();
+      },
+      error: (error) => {
+        console.error('Error creating entry:', error);
+        // Hier könnte eine Fehlermeldung für den Benutzer angezeigt werden
+      },
+    });
   }
 
   private sortEntriesById(entries: PhonebookEntry[]): PhonebookEntry[] {
