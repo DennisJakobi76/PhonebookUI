@@ -40,13 +40,18 @@ export class ApiService {
     );
   }
 
-  getEntries(
+  getEntries(apiUrl: string): Observable<PhonebookEntry[]> {
+    return this.http.get<PhonebookEntry[]>(`${apiUrl}/api/phonebook`);
+  }
+
+  createEntry(
     apiUrl: string,
-    searchTerm: string = ''
-  ): Observable<PhonebookEntry[]> {
-    const url = searchTerm
-      ? `${apiUrl}/api/phonebook?name=${searchTerm}`
-      : `${apiUrl}/api/phonebook`;
-    return this.http.get<PhonebookEntry[]>(url);
+    entry: Omit<PhonebookEntry, 'id'>
+  ): Observable<PhonebookEntry> {
+    return this.http.post<PhonebookEntry>(`${apiUrl}/api/phonebook`, entry);
+  }
+
+  deleteEntry(apiUrl: string, id: number): Observable<void> {
+    return this.http.delete<void>(`${apiUrl}/api/phonebook/${id}`);
   }
 }
