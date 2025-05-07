@@ -12,9 +12,12 @@
 	<div class="entries-table-header">Delete Entry</div>
 </div>
 <div class="entries-table-container">
-	<app-entry *ngFor="let entry of entries" [entry]="entry" (deleteEntry)="handleDelete($event)" />
+	<app-entry *ngFor="let entry of entries" [entry]="entry" (deleteEntry)="handleDelete($event)"
+		(editEntry)="showEntryDetail($event)" />
 </div>
 <div class="add-btn-container">
-	<button class="primary-btn" (click)="showEntryDetail()"><span>Add Entry</span></button>
+	<button class="primary-btn" (click)="showEntryDetail()">
+		<span>Add Entry</span>
+	</button>
 </div>
-<app-entry-detail (save)="addNewEntry($event)" />
+<app-entry-detail (save)="handleSave($event)" />

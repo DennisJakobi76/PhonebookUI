@@ -12,8 +12,13 @@ import { PhonebookEntry } from '../../models/phonebook-entry';
 export class EntryComponent {
   @Input() entry!: PhonebookEntry;
   @Output() deleteEntry = new EventEmitter<number>();
+  @Output() editEntry = new EventEmitter<PhonebookEntry>();
 
   onDelete() {
     this.deleteEntry.emit(this.entry.id);
+  }
+
+  onEdit() {
+    this.editEntry.emit(this.entry);
   }
 }

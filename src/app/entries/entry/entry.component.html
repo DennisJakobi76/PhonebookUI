@@ -3,6 +3,9 @@
 <div class="single-entry-value-container">{{entry.nachname}}</div>
 <div class="single-entry-value-container">{{entry.telefonVorwahl}}</div>
 <div class="single-entry-value-container">{{entry.telefonnummer}}</div>
-<div class="single-entry-value-container"><button class="primary-btn"><span>Edit</span></button></div>
-<div class="single-entry-value-container"><button class="primary-btn" (click)="onDelete()"><span>Delete</span></button>
+<div class="single-entry-value-container">
+	<button class="primary-btn" (click)="onEdit()"><span>Edit</span></button>
+</div>
+<div class="single-entry-value-container">
+	<button class="primary-btn" (click)="onDelete()"><span>Delete</span></button>
 </div>

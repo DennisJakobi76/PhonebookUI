@@ -100,8 +100,36 @@ export class EntriesComponent implements OnInit, OnDestroy {
     });
   }
 
-  showEntryDetail() {
-    this.entryDetail.show();
+  showEntryDetail(entry?: PhonebookEntry) {
+    this.entryDetail.show(entry);
+  }
+
+  handleSave(data: { id?: number; entry: Omit<PhonebookEntry, 'id'> }) {
+    if (data.id) {
+      // Update existing entry
+      this.apiService
+        .updateEntry(this.currentApiUrl, data.id, data.entry)
+        .subscribe({
+          next: () => {
+            // Nach erfolgreichem Update alle Einträge neu laden
+            this.loadEntries();
+          },
+          error: (error) => {
+            console.error('Error updating entry:', error);
+          },
+        });
+    } else {
+      // Create new entry
+      this.apiService.createEntry(this.currentApiUrl, data.entry).subscribe({
+        next: () => {
+          // Nach erfolgreichem Erstellen alle Einträge neu laden
+          this.loadEntries();
+        },
+        error: (error) => {
+          console.error('Error creating entry:', error);
+        },
+      });
+    }
   }
 
   addNewEntry(entryData: Omit<PhonebookEntry, 'id'>) {

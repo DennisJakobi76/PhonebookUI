@@ -54,4 +54,15 @@ export class ApiService {
   deleteEntry(apiUrl: string, id: number): Observable<void> {
     return this.http.delete<void>(`${apiUrl}/api/phonebook/${id}`);
   }
+
+  updateEntry(
+    apiUrl: string,
+    id: number,
+    entry: Omit<PhonebookEntry, 'id'>
+  ): Observable<PhonebookEntry> {
+    return this.http.put<PhonebookEntry>(
+      `${apiUrl}/api/phonebook/${id}`,
+      entry
+    );
+  }
 }
