@@ -17,4 +17,4 @@
 <div class="add-btn-container">
 	<button class="primary-btn" (click)="showEntryDetail()"><span>Add Entry</span></button>
 </div>
-<app-entry-detail />
+<app-entry-detail (save)="addNewEntry($event)" />
