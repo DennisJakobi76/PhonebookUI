@@ -81,7 +81,6 @@ export class EntriesComponent implements OnInit, OnDestroy {
         console.error('Error loading entries:', error);
         this.entries = [];
         this.allEntries = [];
-        // Hier könnte eine Fehlermeldung für den Benutzer angezeigt werden
       },
     });
   }
@@ -94,7 +93,6 @@ export class EntriesComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error('Error deleting entry:', error);
-        // Hier könnte eine Fehlermeldung für den Benutzer angezeigt werden
       },
     });
   }
@@ -105,12 +103,10 @@ export class EntriesComponent implements OnInit, OnDestroy {
 
   handleSave(data: { id?: number; entry: Omit<PhonebookEntry, 'id'> }) {
     if (data.id) {
-      // Update existing entry
       this.apiService
         .updateEntry(this.currentApiUrl, data.id, data.entry)
         .subscribe({
           next: () => {
-            // Nach erfolgreichem Update alle Einträge neu laden
             this.loadEntries();
           },
           error: (error) => {
@@ -118,10 +114,8 @@ export class EntriesComponent implements OnInit, OnDestroy {
           },
         });
     } else {
-      // Create new entry
       this.apiService.createEntry(this.currentApiUrl, data.entry).subscribe({
         next: () => {
-          // Nach erfolgreichem Erstellen alle Einträge neu laden
           this.loadEntries();
         },
         error: (error) => {
@@ -139,7 +133,6 @@ export class EntriesComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error('Error creating entry:', error);
-        // Hier könnte eine Fehlermeldung für den Benutzer angezeigt werden
       },
     });
   }
