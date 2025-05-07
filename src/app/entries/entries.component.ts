@@ -15,7 +15,8 @@ import { EntryDetailComponent } from './entry-detail/entry-detail.component';
   styleUrl: './entries.component.scss',
 })
 export class EntriesComponent implements OnInit, OnDestroy {
-  entries: PhonebookEntry[] = [];
+  entries: PhonebookEntry[] = []; // Gefilterte Einträge zur Anzeige
+  private allEntries: PhonebookEntry[] = []; // Alle Einträge im Speicher
   searchTerm: string = '';
   private currentApiUrl: string = '';
   private subscriptions: Subscription[] = [];
@@ -40,6 +41,7 @@ export class EntriesComponent implements OnInit, OnDestroy {
       this.apiService.getApiStatus().subscribe((isAvailable) => {
         if (!isAvailable) {
           this.entries = [];
+          this.allEntries = [];
         }
       })
     );
@@ -50,23 +52,42 @@ export class EntriesComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event: any) {
-    this.searchTerm = event.target.value;
-    if (this.currentApiUrl) {
-      this.loadEntries();
+    this.searchTerm = event.target.value.toLowerCase();
+    this.filterEntries();
+  }
+
+  private filterEntries() {
+    if (!this.searchTerm) {
+      this.entries = this.sortEntriesById([...this.allEntries]);
+      return;
     }
+
+    this.entries = this.sortEntriesById(
+      this.allEntries.filter(
+        (entry) =>
+          entry.vorname.toLowerCase().includes(this.searchTerm) ||
+          entry.nachname.toLowerCase().includes(this.searchTerm) ||
+          entry.telefonVorwahl.toLowerCase().includes(this.searchTerm)
+      )
+    );
   }
 
   private loadEntries() {
-    this.apiService.getEntries(this.currentApiUrl, this.searchTerm).subscribe({
-      next: (entries) => (this.entries = this.sortEntriesById(entries)),
-      error: () => (this.entries = []),
+    this.apiService.getEntries(this.currentApiUrl).subscribe({
+      next: (entries) => {
+        this.allEntries = entries;
+        this.filterEntries();
+      },
+      error: () => {
+        this.entries = [];
+        this.allEntries = [];
+      },
     });
   }
 
   handleDelete(id: number) {
-    this.entries = this.sortEntriesById(
-      this.entries.filter((entry) => entry.id !== id)
-    );
+    this.allEntries = this.allEntries.filter((entry) => entry.id !== id);
+    this.filterEntries();
   }
 
   showEntryDetail() {
@@ -80,15 +101,16 @@ export class EntriesComponent implements OnInit, OnDestroy {
       ...entryData,
     };
 
-    this.entries = this.sortEntriesById([...this.entries, newEntry]);
+    this.allEntries = [...this.allEntries, newEntry];
+    this.filterEntries();
   }
 
   private getNextAvailableId(): number {
-    if (this.entries.length === 0) {
+    if (this.allEntries.length === 0) {
       return 1;
     }
 
-    const usedIds = new Set(this.entries.map((entry) => entry.id));
+    const usedIds = new Set(this.allEntries.map((entry) => entry.id));
     let nextId = 1;
 
     while (usedIds.has(nextId)) {
