@@ -1,7 +1,7 @@
 export interface PhonebookEntry {
   id: number;
-  vorname: string;
-  nachname: string;
-  telefonVorwahl: string;
-  telefonnummer: string;
+  firstName: string;
+  lastName: string;
+  phonePrefix: string;
+  phoneNumber: string;
 }

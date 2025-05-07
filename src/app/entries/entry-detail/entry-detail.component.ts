@@ -27,10 +27,10 @@ export class EntryDetailComponent {
     if (existingEntry) {
       this.editId = existingEntry.id;
       this.entry = {
-        vorname: existingEntry.vorname,
-        nachname: existingEntry.nachname,
-        telefonVorwahl: existingEntry.telefonVorwahl,
-        telefonnummer: existingEntry.telefonnummer,
+        firstName: existingEntry.firstName,
+        lastName: existingEntry.lastName,
+        phonePrefix: existingEntry.phonePrefix,
+        phoneNumber: existingEntry.phoneNumber,
       };
     } else {
       this.resetForm();
@@ -57,10 +57,10 @@ export class EntryDetailComponent {
 
   private getEmptyEntry(): Omit<PhonebookEntry, 'id'> {
     return {
-      vorname: '',
-      nachname: '',
-      telefonVorwahl: '',
-      telefonnummer: '',
+      firstName: '',
+      lastName: '',
+      phonePrefix: '',
+      phoneNumber: '',
     };
   }
 }
