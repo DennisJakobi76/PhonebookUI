@@ -14,18 +14,27 @@ export class EntryDetailComponent {
   @HostBinding('class.visible')
   isVisible = false;
 
-  @Output() save = new EventEmitter<Omit<PhonebookEntry, 'id'>>();
+  @Output() save = new EventEmitter<{
+    id?: number;
+    entry: Omit<PhonebookEntry, 'id'>;
+  }>();
 
-  entry: Omit<PhonebookEntry, 'id'> = {
-    vorname: '',
-    nachname: '',
-    telefonVorwahl: '',
-    telefonnummer: '',
-  };
+  entry: Omit<PhonebookEntry, 'id'> = this.getEmptyEntry();
+  editId?: number;
 
-  show() {
+  show(existingEntry?: PhonebookEntry) {
     this.isVisible = true;
-    this.resetForm();
+    if (existingEntry) {
+      this.editId = existingEntry.id;
+      this.entry = {
+        vorname: existingEntry.vorname,
+        nachname: existingEntry.nachname,
+        telefonVorwahl: existingEntry.telefonVorwahl,
+        telefonnummer: existingEntry.telefonnummer,
+      };
+    } else {
+      this.resetForm();
+    }
   }
 
   hide() {
@@ -34,12 +43,20 @@ export class EntryDetailComponent {
   }
 
   onSave() {
-    this.save.emit(this.entry);
+    this.save.emit({
+      id: this.editId,
+      entry: this.entry,
+    });
     this.hide();
   }
 
   private resetForm() {
-    this.entry = {
+    this.entry = this.getEmptyEntry();
+    this.editId = undefined;
+  }
+
+  private getEmptyEntry(): Omit<PhonebookEntry, 'id'> {
+    return {
       vorname: '',
       nachname: '',
       telefonVorwahl: '',
