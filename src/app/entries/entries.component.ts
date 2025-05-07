@@ -65,9 +65,9 @@ export class EntriesComponent implements OnInit, OnDestroy {
     this.entries = this.sortEntriesById(
       this.allEntries.filter(
         (entry) =>
-          entry.vorname.toLowerCase().includes(this.searchTerm) ||
-          entry.nachname.toLowerCase().includes(this.searchTerm) ||
-          entry.telefonVorwahl.toLowerCase().includes(this.searchTerm)
+          entry.firstName.toLowerCase().includes(this.searchTerm) ||
+          entry.lastName.toLowerCase().includes(this.searchTerm) ||
+          entry.phonePrefix.toLowerCase().includes(this.searchTerm)
       )
     );
   }
