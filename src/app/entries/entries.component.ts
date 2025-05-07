@@ -9,7 +9,6 @@ import { EntryDetailComponent } from './entry-detail/entry-detail.component';
 
 @Component({
   selector: 'app-entries',
-  standalone: true,
   imports: [EntryComponent, CommonModule, FormsModule, EntryDetailComponent],
   templateUrl: './entries.component.html',
   styleUrl: './entries.component.scss',

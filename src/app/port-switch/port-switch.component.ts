@@ -6,7 +6,6 @@ import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-port-switch',
-  standalone: true,
   imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './port-switch.component.html',
   styleUrl: './port-switch.component.scss',
