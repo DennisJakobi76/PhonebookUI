@@ -6,7 +6,6 @@ import { EntriesComponent } from './entries/entries.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     RouterOutlet,
     HeaderComponent,

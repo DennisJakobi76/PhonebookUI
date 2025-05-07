@@ -5,7 +5,6 @@ import { PhonebookEntry } from '../../models/phonebook-entry';
 
 @Component({
   selector: 'app-entry-detail',
-  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './entry-detail.component.html',
   styleUrl: './entry-detail.component.scss',
