@@ -58,13 +58,15 @@ export class EntriesComponent implements OnInit, OnDestroy {
 
   private loadEntries() {
     this.apiService.getEntries(this.currentApiUrl, this.searchTerm).subscribe({
-      next: (entries) => (this.entries = entries),
+      next: (entries) => (this.entries = this.sortEntriesById(entries)),
       error: () => (this.entries = []),
     });
   }
 
   handleDelete(id: number) {
-    this.entries = this.entries.filter((entry) => entry.id !== id);
+    this.entries = this.sortEntriesById(
+      this.entries.filter((entry) => entry.id !== id)
+    );
   }
 
   showEntryDetail() {
@@ -78,7 +80,7 @@ export class EntriesComponent implements OnInit, OnDestroy {
       ...entryData,
     };
 
-    this.entries = [...this.entries, newEntry];
+    this.entries = this.sortEntriesById([...this.entries, newEntry]);
   }
 
   private getNextAvailableId(): number {
@@ -94,5 +96,9 @@ export class EntriesComponent implements OnInit, OnDestroy {
     }
 
     return nextId;
+  }
+
+  private sortEntriesById(entries: PhonebookEntry[]): PhonebookEntry[] {
+    return entries.sort((a, b) => a.id - b.id);
   }
 }
