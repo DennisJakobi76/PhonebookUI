@@ -14,8 +14,8 @@ import { EntryDetailComponent } from './entry-detail/entry-detail.component';
   styleUrl: './entries.component.scss',
 })
 export class EntriesComponent implements OnInit, OnDestroy {
-  entries: PhonebookEntry[] = []; // Gefilterte Einträge zur Anzeige
-  private allEntries: PhonebookEntry[] = []; // Alle Einträge im Speicher
+  entries: PhonebookEntry[] = [];
+  private allEntries: PhonebookEntry[] = [];
   searchTerm: string = '';
   private currentApiUrl: string = '';
   private subscriptions: Subscription[] = [];
@@ -116,7 +116,7 @@ export class EntriesComponent implements OnInit, OnDestroy {
     } else {
       this.apiService.createEntry(this.currentApiUrl, data.entry).subscribe({
         next: () => {
-          this.loadEntries();
+          this.loadEntries(); // Lade alle Einträge neu nach erfolgreichem Erstellen
         },
         error: (error) => {
           console.error('Error creating entry:', error);
@@ -127,9 +127,8 @@ export class EntriesComponent implements OnInit, OnDestroy {
 
   addNewEntry(entryData: Omit<PhonebookEntry, 'id'>) {
     this.apiService.createEntry(this.currentApiUrl, entryData).subscribe({
-      next: (newEntry) => {
-        this.allEntries = [...this.allEntries, newEntry];
-        this.filterEntries();
+      next: () => {
+        this.loadEntries();
       },
       error: (error) => {
         console.error('Error creating entry:', error);
